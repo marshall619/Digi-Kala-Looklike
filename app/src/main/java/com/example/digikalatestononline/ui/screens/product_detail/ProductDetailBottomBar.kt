@@ -14,9 +14,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.digikalatestononline.R
+import com.example.digikalatestononline.data.model.basket.CartItem
+import com.example.digikalatestononline.data.model.basket.CartStatus
 import com.example.digikalatestononline.data.model.product_detail.ProductDetail
+import com.example.digikalatestononline.navigation.Screen
 import com.example.digikalatestononline.ui.theme.DigikalaDarkRed
 import com.example.digikalatestononline.ui.theme.LocalElevation
 import com.example.digikalatestononline.ui.theme.LocalShape
@@ -30,11 +34,13 @@ import com.example.digikalatestononline.ui.theme.h5
 import com.example.digikalatestononline.ui.theme.h6
 import com.example.digikalatestononline.util.DigitHelper
 import com.example.digikalatestononline.util.DigitHelper.applyDiscount
+import com.example.digikalatestononline.viewmodel.BasketViewModel
 
 @Composable
 fun ProductDetailBottomBar(
     item: ProductDetail,
     navController: NavController,
+    viewModel : BasketViewModel = hiltViewModel(),
 ){
     var price = 0L
     item.price?.let {
@@ -64,7 +70,21 @@ fun ProductDetailBottomBar(
         ) {
 
             Button(
-                onClick = {},
+                onClick = {
+                    if (item.imageSlider?.isNotEmpty() == true){
+                        viewModel.insertCartItem(CartItem(
+                            item._id.toString(),
+                            item.discountPercent ?: 0,
+                            item.imageSlider[0].image ,
+                            item.name.toString(),
+                            item.price ?: 0,
+                            item.seller.toString(),
+                            count = 1,
+                            cartStatus = CartStatus.CURRENT_CART
+                        ))
+                        navController.navigate(Screen.Basket.route)
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.digikalaRed),
                 shape = LocalShape.current.small,
 
