@@ -21,6 +21,8 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.launch
 
+
+//hello world
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Home(navController)
@@ -31,6 +33,7 @@ fun Home(
     navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+
     // FOR GETTING BACK LANGUAGE
     LocaleUtils.setLocale(LocalContext.current, Constants.USER_LANGUAGE)
 

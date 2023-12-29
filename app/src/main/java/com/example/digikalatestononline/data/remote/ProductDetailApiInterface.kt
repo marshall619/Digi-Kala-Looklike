@@ -2,6 +2,7 @@ package com.example.digikalatestononline.data.remote
 
 import com.example.digikalatestononline.data.model.ResponseResult
 import com.example.digikalatestononline.data.model.home.StoreProducts
+import com.example.digikalatestononline.data.model.product_detail.Comment
 import com.example.digikalatestononline.data.model.product_detail.NewComment
 import com.example.digikalatestononline.data.model.product_detail.ProductDetail
 import retrofit2.Response
@@ -26,5 +27,13 @@ interface ProductDetailApiInterface {
     suspend fun setNewComment(
         @Body newComment: NewComment
     ): Response<ResponseResult<String>>
+
+    @GET("v1/getAllProductComments")
+    suspend fun getAllProductComments(
+        @Query("id") id: String,
+        @Query("pageSize") pageSize: String,
+        @Query("pageNumber") pageNumber: String,
+    ): Response<ResponseResult<List<Comment>>>
+
 
 }

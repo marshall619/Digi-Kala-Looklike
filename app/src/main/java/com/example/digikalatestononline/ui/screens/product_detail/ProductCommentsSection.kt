@@ -64,7 +64,7 @@ fun ProductCommentsSection(
                 color = MaterialTheme.colors.LightCyan,
                 style = Typography.h4,
                 modifier = Modifier.clickable {
-                    navController.navigate(Screen.AllComment.withArgs(productId))
+                    navController.navigate(Screen.AllComment.withArgs(productId , commentCount))
                 }
             )
         }
