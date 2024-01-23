@@ -28,10 +28,12 @@ fun AppConfig(
 
     getDataStoreVariables(dataStore)
     Log.e("6191","not token Refreshed is :$USER_TOKEN")
-    profileViewModel.refreshToken(USER_PHONE , USER_PASSWORD)
+    LaunchedEffect(true){
+        profileViewModel.refreshToken(USER_PHONE , USER_PASSWORD)
+    }
 
     val loginResponse by profileViewModel.loginResponse.collectAsState()
-    LaunchedEffect(Dispatchers.Main) {
+    //LaunchedEffect(Dispatchers.Main) {
         when (loginResponse) {
             is NetworkResult.Success -> {
                 loginResponse.data?.let { user ->
@@ -49,7 +51,7 @@ fun AppConfig(
 
             else -> {}
         }
-    }
+    //}
 }
 
 private fun getDataStoreVariables(dataStore: DataStoreViewModel) {
