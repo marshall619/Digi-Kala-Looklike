@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -41,7 +42,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
+
 import com.example.digikalatestononline.R
 import com.example.digikalatestononline.data.model.product_detail.Comment
 import com.example.digikalatestononline.ui.components.Loading3Dots
@@ -105,11 +108,20 @@ fun AllCommentProductScreen(
 
         }
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(commentList) { comments ->
+            //in paging 3
+            items(
+                count = commentList.itemCount ,
+                key = commentList.itemKey { comment -> comment._id },
+                contentType = commentList.itemContentType { "commentType" }
+            ){index ->
+                CommentsItem(item = commentList[index]!!)
+            }
+            //in paging 1
+            /*items(commentList.itemSnapshotList) { comments ->
                 if (comments != null) {
                     CommentsItem(item = comments)
                 }
-            }
+            }*/
 
             commentList.apply {
                 when {
