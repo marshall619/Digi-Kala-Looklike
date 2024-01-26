@@ -3,6 +3,7 @@ package com.example.digikalatestononline.di
 import android.content.Context
 import androidx.room.Room
 import com.example.digikalatestononline.data.db.DigiKalaDataBase
+import com.example.digikalatestononline.data.db.DigiKalaDataBase.Companion.MIGRATION_1_2
 import com.example.digikalatestononline.data.remote.BasketApiInterface
 import com.example.digikalatestononline.util.Constants.DATABASE_NAME
 import dagger.Module
@@ -26,6 +27,6 @@ object DataBaseModule {
         context,
         DigiKalaDataBase :: class.java,
         DATABASE_NAME
-    ).build()
+    ).addMigrations(MIGRATION_1_2).build()
 
 }

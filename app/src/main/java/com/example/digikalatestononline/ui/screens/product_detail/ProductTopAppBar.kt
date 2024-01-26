@@ -208,7 +208,7 @@ private fun shareToSocialMedia(
     context: Context,
     productName: String,
     productPrice: String,
-    url: String
+    url : String
 ) {
     val shareIntent = Intent(Intent.ACTION_SEND)
     shareIntent.type = "text/plain"

@@ -14,6 +14,7 @@ object Constants {
     const val IV = BuildConfig.IV
     const val SHOPPING_CART_TABLE = "shopping_cart"
     const val DATABASE_NAME = "digikala_db"
+    const val FAVORITE_LIST_TABLE = "favorite_list_table"
 
     const val ZARINPAL_MERCHANT_ID = ""
 
