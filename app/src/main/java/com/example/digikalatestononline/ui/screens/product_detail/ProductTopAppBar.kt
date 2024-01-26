@@ -1,5 +1,7 @@
 package com.example.digikalatestononline.ui.screens.product_detail
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
@@ -35,15 +37,24 @@ import com.example.digikalatestononline.ui.theme.darkText
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.example.digikalatestononline.data.model.product_detail.Price
+import com.example.digikalatestononline.data.model.product_detail.ProductDetail
+import com.example.digikalatestononline.navigation.Screen
 import com.example.digikalatestononline.ui.theme.Typography
 import com.example.digikalatestononline.ui.theme.h4
+import com.example.digikalatestononline.util.DigitHelper
+import com.google.gson.Gson
 
 @Composable
 fun ProductTopAppBar(
-    navController: NavHostController
+    navController: NavHostController,
+    item : ProductDetail
 ) {
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,7 +84,7 @@ fun ProductTopAppBar(
         ) {
 
             IconButton(onClick = {
-                //todo
+                navController.navigate(Screen.Basket.route)
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.basket),
@@ -124,6 +135,8 @@ fun ProductTopAppBar(
                 DropdownMenuItem(
                     onClick = {
                         expanded = false
+                        val priceListString = Gson().toJson(item.priceList)
+                        navController.navigate(Screen.productDetailChart.route + "?jsonString=${priceListString}")
                     }
                 ) {
                     Row(
@@ -153,6 +166,12 @@ fun ProductTopAppBar(
                 DropdownMenuItem(
                     onClick = {
                         expanded = false
+                        shareToSocialMedia(
+                            context ,
+                            item.name!!,
+                            DigitHelper.digitByLocateAndSeparator(item.price!!.toString()),
+                            "https//marshall.com"
+                        )
                     }
                 ) {
                     Row(
@@ -183,3 +202,22 @@ fun ProductTopAppBar(
 
     }
 }
+
+
+private fun shareToSocialMedia(
+    context: Context,
+    productName: String,
+    productPrice: String,
+    url: String
+) {
+    val shareIntent = Intent(Intent.ACTION_SEND)
+    shareIntent.type = "text/plain"
+
+    shareIntent.putExtra(
+        Intent.EXTRA_TEXT,
+        "$productName با قیمت باورنکردنی $productPrice تومان فقط در فروشگاه زیر \n $url"
+    )
+
+    context.startActivity(Intent.createChooser(shareIntent , "share to..."))
+}
+

@@ -18,6 +18,7 @@ import com.example.digikalatestononline.ui.screens.product_detail.AllCommentProd
 import com.example.digikalatestononline.ui.screens.product_detail.NewCommentScreen
 import com.example.digikalatestononline.ui.screens.product_detail.ProductDescriptionScreen
 import com.example.digikalatestononline.ui.screens.product_detail.ProductDetailScreen
+import com.example.digikalatestononline.ui.screens.product_detail.ProductPriceChartScreen
 import com.example.digikalatestononline.ui.screens.product_detail.ProductTechnicalFeaturesScreen
 
 
@@ -142,6 +143,20 @@ fun SetupNavGraph(navController: NavHostController) {
                 )
             }
 
+        }
+
+        composable(route = Screen.productDetailChart.route + "?jsonString={jsonString}",
+            arguments = listOf(
+                navArgument("jsonString") {
+                    type = NavType.StringType
+                    defaultValue = " "
+                    nullable = true
+                }
+            )
+        ){
+            it.arguments!!.getString("jsonString")?.let {jsonString ->
+                ProductPriceChartScreen(navController = navController, jsonString = jsonString)
+            }
         }
 
         composable(route = Screen.NewComment.route + "?productId={productId}?productName={productName}?imageUrl={imageUrl}",

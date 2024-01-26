@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.digikalatestononline.R
 import com.example.digikalatestononline.data.model.product_detail.Comment
+import com.example.digikalatestononline.data.model.product_detail.Price
 import com.example.digikalatestononline.data.model.product_detail.ProductColor
 import com.example.digikalatestononline.data.model.product_detail.ProductDetail
 import com.example.digikalatestononline.data.model.product_detail.SliderImage
@@ -47,6 +48,7 @@ fun ProductDetailScreen(
     var commentList by remember { mutableStateOf(emptyList<Comment>()) }
     var commentCount by remember { mutableStateOf(0) }
     var technicalFeatures by remember { mutableStateOf("") }
+    var priceList by remember { mutableStateOf(emptyList<Price>()) }
 
     LaunchedEffect(Dispatchers.Main){
         viewModel.getProductById(productId)
@@ -56,6 +58,7 @@ fun ProductDetailScreen(
                     productDetailList = productDetail.data!!
                     sliderImageList = productDetailList.imageSlider ?: emptyList()
                     sliderColorList = productDetailList.colors ?: emptyList()
+                    priceList = productDetailList.priceList ?: emptyList()
                     categoryId = productDetailList.categoryId ?: ""
                     description = productDetailList.description ?: ""
                     technicalFeatures = productDetailList.technicalFeatures.toString()
@@ -90,7 +93,7 @@ fun ProductDetailScreen(
                 )
             },
             topBar = {
-                ProductTopAppBar(navController = navController)
+                ProductTopAppBar(navController = navController , productDetailList)
             }
         ) {
             LazyColumn(modifier = Modifier.padding(bottom = 70.dp)){

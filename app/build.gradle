@@ -147,4 +147,8 @@ dependencies {
 
     // For Jetpack Compose.
     implementation("com.patrykandpatrick.vico:compose:1.13.1")
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.9.1'
+
 }
