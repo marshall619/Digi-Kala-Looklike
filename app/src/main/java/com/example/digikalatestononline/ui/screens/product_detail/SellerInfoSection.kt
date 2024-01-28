@@ -38,7 +38,7 @@ import com.example.digikalatestononline.util.DigitHelper
 
 
 @Composable
-fun SellerInfoSection(){
+fun SellerInfoSection(sellerPrice : Long){
     Divider(
         modifier = Modifier
             .fillMaxWidth()
@@ -96,7 +96,7 @@ fun SellerInfoSection(){
                 Spacer(modifier = Modifier.height(LocalSpacing.current.small))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "${DigitHelper.digitByLocate("101")}%" +
+                        text = "${DigitHelper.digitByLocate("99")}%" +
                                 " رضایت خریداران | عملکرد ",
                         style = Typography.h6,
                         color = MaterialTheme.colors.semiDarkText,
@@ -311,7 +311,7 @@ fun SellerInfoSection(){
                 Text(
                     modifier = Modifier
                         .padding(vertical = LocalSpacing.current.small),
-                    text = "${stringResource(id = R.string.manufacturer_price)} 111 ${
+                    text = "${stringResource(id = R.string.manufacturer_price)} ${DigitHelper.digitByLocateAndSeparator(sellerPrice.toString())} ${
                         stringResource(
                             id = R.string.toman
                         )

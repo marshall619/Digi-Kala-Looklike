@@ -2,6 +2,7 @@ package com.example.digikalatestononline.ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,14 +49,15 @@ import com.example.digikalatestononline.util.Constants
 import com.example.digikalatestononline.util.DigitHelper
 
 @Composable
-fun MostFavoriteProductOffer(item: StoreProducts) {
+fun MostFavoriteProductOffer(item: StoreProducts , onClick : () -> Unit) {
     Column(
         modifier = Modifier
             .width(180.dp)
             .padding(
                 horizontal = LocalSpacing.current.semiSmall,
                 vertical = LocalSpacing.current.semiLarge,
-            ),
+            )
+            .clickable { onClick() },
     ) {
 
         Row {

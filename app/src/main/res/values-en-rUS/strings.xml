@@ -185,6 +185,8 @@ After confirming the comment, go to the club missions page and get your points</
 
     <string name="product_price_chart">Product price chart</string>
     <string name="product_price_chart_time">View the price changes of this product over time</string>
+    <string name="in_your_basket">In your basket</string>
+    <string name="view_in_cart">View in cart</string>
 
 
 </resources>

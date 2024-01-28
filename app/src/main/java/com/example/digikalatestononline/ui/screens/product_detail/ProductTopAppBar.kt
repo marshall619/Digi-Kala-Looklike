@@ -42,6 +42,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.digikalatestononline.data.model.product_detail.Price
 import com.example.digikalatestononline.data.model.product_detail.ProductDetail
+import com.example.digikalatestononline.data.model.profile.FavItem
 import com.example.digikalatestononline.navigation.Screen
 import com.example.digikalatestononline.ui.theme.Typography
 import com.example.digikalatestononline.ui.theme.h4
@@ -94,24 +95,17 @@ fun ProductTopAppBar(
                 )
             }
 
-            var checkedState by remember { mutableStateOf(false) }
-
-            IconToggleButton(
-                checked = checkedState,
-                onCheckedChange = { checkedState = !checkedState }) {
-                val transition =
-                    updateTransition(targetState = checkedState, label = "icon transition")
-                val tint by transition.animateColor(label = "iconColor") { isChecked ->
-                    if (isChecked) Color.Red else MaterialTheme.colors.darkText
-                }
-                Icon(
-                    imageVector = if (checkedState) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = null,
-                    tint = tint,
-                    modifier = Modifier
-                        .size(27.dp)
+            ProductDetailFavItemSection(
+                favItem = FavItem(
+                    item._id ?: "",
+                    item.discountPercent ?: 0 ,
+                    item.imageSlider?.get(0)?.image ?: "" ,
+                    item.name ?: "",
+                    item.price ?: 0,
+                    item.seller ?: "",
+                    item.star ?: 0.0
                 )
-            }
+            )
 
             var expanded by remember { mutableStateOf(false) }
             IconButton(
@@ -136,7 +130,7 @@ fun ProductTopAppBar(
                     onClick = {
                         expanded = false
                         val priceListString = Gson().toJson(item.priceList)
-                        navController.navigate(Screen.productDetailChart.route + "?jsonString=${priceListString}")
+                        navController.navigate(Screen.ProductDetailChart.route + "?jsonString=${priceListString}")
                     }
                 ) {
                     Row(

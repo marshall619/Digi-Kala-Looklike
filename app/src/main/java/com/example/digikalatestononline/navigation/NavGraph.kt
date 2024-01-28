@@ -145,7 +145,7 @@ fun SetupNavGraph(navController: NavHostController) {
 
         }
 
-        composable(route = Screen.productDetailChart.route + "?jsonString={jsonString}",
+        composable(route = Screen.ProductDetailChart.route + "?jsonString={jsonString}",
             arguments = listOf(
                 navArgument("jsonString") {
                     type = NavType.StringType

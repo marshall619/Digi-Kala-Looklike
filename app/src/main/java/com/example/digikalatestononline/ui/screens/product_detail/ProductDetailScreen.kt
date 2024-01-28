@@ -100,8 +100,8 @@ fun ProductDetailScreen(
                 item { ProductTopSliderSection(sliderList = sliderImageList) }
                 item { ProductDetailHeaderSection(productDetailList) }
                 item { ProductSelectColorSection(sliderColorList) }
-                item { SellerInfoSection() }
-                item { SimilarProductSection(categoryId) }
+                item { SellerInfoSection(productDetailList.price ?: 0) }
+                item { SimilarProductSection(navController,categoryId) }
                 item { ProductDescriptionSection(navController,description , technicalFeatures) }
                 item { ProductCommentsSection(commentList , commentCount , productId , navController) }
                 item { ProductSetCommentsSection(navController , productDetailList) }

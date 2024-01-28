@@ -191,6 +191,10 @@
     <string name="product_price_chart">نمودار قیمت محصول در 6 ماه اخیر</string>
     <string name="product_price_chart_time">مشاهده تغییرات قیمت این محصول نسبت به زمان</string>
 
+    <string name="in_your_basket">در سبد شما</string>
+    <string name="view_in_cart">مشاهده در سبد خرید</string>
+
+
 
 
 </resources>

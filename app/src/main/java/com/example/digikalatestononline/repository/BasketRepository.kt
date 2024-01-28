@@ -14,6 +14,7 @@ import com.example.digikalatestononline.data.remote.CategoryApiInterface
 import com.example.digikalatestononline.data.remote.HomeApiInterface
 import com.example.digikalatestononline.data.remote.NetworkResult
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BasketRepository @Inject constructor(
@@ -52,5 +53,12 @@ class BasketRepository @Inject constructor(
     suspend fun deleteAllItems() {
         dao.deleteAllItems(CartStatus.CURRENT_CART)
     }
+
+    fun getItemsCountInBasket(itemId: String): Flow<Int> =
+        dao.getItemsCountInBasket(itemId)
+
+    fun isItemExistInBasket(itemId: String): Flow<Boolean> =
+        dao.isItemExistInBasket(itemId)
+
 
 }

@@ -22,10 +22,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.digikalatestononline.R
 import com.example.digikalatestononline.data.model.home.Slider
 import com.example.digikalatestononline.data.model.home.StoreProducts
 import com.example.digikalatestononline.data.remote.NetworkResult
+import com.example.digikalatestononline.navigation.Screen
 import com.example.digikalatestononline.ui.theme.DarkCyan
 import com.example.digikalatestononline.ui.theme.LocalSpacing
 import com.example.digikalatestononline.ui.theme.Typography
@@ -35,7 +37,7 @@ import com.example.digikalatestononline.ui.theme.h6
 import com.example.digikalatestononline.viewmodel.HomeViewModel
 
 @Composable
-fun MostFavoriteProductsItemSection(viewModel: HomeViewModel = hiltViewModel()) {
+fun MostFavoriteProductsItemSection(navController: NavController,viewModel: HomeViewModel = hiltViewModel()) {
     var mostFavoriteItems by remember { mutableStateOf<List<StoreProducts>>(emptyList()) }
     var loading by remember { mutableStateOf(false) }
 
@@ -88,7 +90,9 @@ fun MostFavoriteProductsItemSection(viewModel: HomeViewModel = hiltViewModel()) 
 
         LazyRow(){
             items(mostFavoriteItems){item ->
-                MostFavoriteProductOffer(item)
+                MostFavoriteProductOffer(item){
+                    navController.navigate(Screen.ProductDetail.withArgs(item._id))
+                }
             }
             item{
                 MostFavoriteProductShowMore()

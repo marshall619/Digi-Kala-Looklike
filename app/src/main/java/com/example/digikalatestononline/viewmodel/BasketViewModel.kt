@@ -114,5 +114,11 @@ class BasketViewModel @Inject constructor(private val repository: BasketReposito
         }
     }
 
+    fun getItemsCountInBasket(itemId: String): Flow<Int> =
+        repository.getItemsCountInBasket(itemId)
+
+    fun isItemExistInBasket(itemId: String): Flow<Boolean> =
+        repository.isItemExistInBasket(itemId)
+
 
 }

@@ -17,9 +17,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.digikalatestononline.R
 import com.example.digikalatestononline.data.model.home.StoreProducts
 import com.example.digikalatestononline.data.remote.NetworkResult
+import com.example.digikalatestononline.navigation.Screen
 import com.example.digikalatestononline.ui.screens.home.MostFavoriteProductOffer
 import com.example.digikalatestononline.ui.screens.home.MostFavoriteProductShowMore
 import com.example.digikalatestononline.ui.theme.LocalSpacing
@@ -31,6 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun SimilarProductSection(
+    navController: NavController,
     categoryId: String,
     viewModel: ProductDetailViewModel = hiltViewModel()
 ){
@@ -95,7 +98,9 @@ fun SimilarProductSection(
 
         LazyRow {
             items(similarList) { item ->
-                MostFavoriteProductOffer(item)
+                MostFavoriteProductOffer(item){
+                    navController.navigate(Screen.ProductDetail.withArgs(item._id))
+                }
             }
             item {
                 MostFavoriteProductShowMore()
